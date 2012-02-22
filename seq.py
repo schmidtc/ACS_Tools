@@ -4,6 +4,8 @@ seq.py -- Do something useful with Sequence_Number_and_Table_Number_Lookup.txt
 
 __author__ = "Charles R. Schmidt <schmidtc@gmail.com>"
 
+import os
+import urllib,hashlib
 import pysal
 import json
 DEBUG = False
@@ -105,6 +107,20 @@ class ACS_Table(object):
 
 
 fname = "Sequence_Number_and_Table_Number_Lookup.txt"
+fmd5 = '09f40017cda448a96cb24cdc62a4857b'
+baseurl = 'http://www2.census.gov/acs2010_5yr/summaryfile/'
+if not os.path.exists(fname):
+    url = urllib.urlopen(baseurl+fname)
+    dat = url.read()
+    url.close()
+    if hashlib.md5(dat).hexdigest() != fmd5:
+        print 10*"*"+" WARNING! "+10*"*"
+        print "Downloaded file seems to be corrupt!"
+        print "Please download:",baseurl+fname
+    else:
+        o = open(fname,'w')
+        o.write(dat)
+        o.close()
 input = pysal.open(fname,'r','csv')
 input.cast('Sequence Number',str)
 header = input.header
