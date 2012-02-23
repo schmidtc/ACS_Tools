@@ -1,16 +1,15 @@
 __author__ = "Charles R. Schmidt <schmidtc@gmail.com>"
 
+from config import STATE_NAME as STATES
+from config import ACSGEO as OUT_DIR
+from config import DEBUG
 import urllib
 import re
 import os
 
-DEBUG = True
-
-OUT_DIR = "ACS_GEO"
 if not os.path.isdir(OUT_DIR):
     os.mkdir(OUT_DIR)
 # extracted from http://www2.census.gov/acs2010_5yr/summaryfile/2006-2010_ACSSF_By_State_By_Sequence_Table_Subset/ using vim and python
-STATES = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "DistrictOfColumbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "NewHampshire", "NewJersey", "NewMexico", "NewYork", "NorthCarolina", "NorthDakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "PuertoRico", "RhodeIsland", "SouthCarolina", "SouthDakota", "Tennessee", "Texas", "UnitedStates", "Utah", "Vermont", "Virginia", "Washington", "WestVirginia", "Wisconsin", "Wyoming"]
 
 BASE_URL = "http://www2.census.gov/acs2010_5yr/summaryfile/2006-2010_ACSSF_By_State_By_Sequence_Table_Subset/"
 DATA_URL = "/Tracts_Block_Groups_Only/"
