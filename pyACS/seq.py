@@ -86,7 +86,7 @@ class ACS_Table(object):
             self._data['Sequences'][sq]['Table Title'] = row['Table Title']
             self._data['Sequences'][sq]['Subject Area'] = row['Subject Area']
             self._seq = row['Sequence Number']
-            self._column = int(row['Start Position'])
+            self._column = int(row['Start Position']) - 1 #Make zero-offset
         elif row['Line Number'] == '' and row['Start Position'] == '':
             assert row['Table Title'].startswith('Universe:')
             self._data['Sequences'][sq]['Universe'] = row['Table Title'].lstrip('Universe: ')
@@ -156,4 +156,13 @@ for i,doc in enumerate(tables.values()):
     o.write('\n')
     o.write(doc.json)
     o.write('\n')
+o.close()
+
+import config
+o = open(os.path.join(config.PYACS_DATAPATH,'column_lookup.csv'),'w')
+o.write('CID,SEQ,IDX\n')
+for table in tables:
+    for col in tables[table]._data['Columns']:
+        seq,idx,cid,name = col
+        o.write(','.join(map(str,[cid,seq,idx])) +'\n')
 o.close()
