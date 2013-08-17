@@ -124,13 +124,15 @@ class ACS_Table(object):
 
 
 fname = "Sequence_Number_and_Table_Number_Lookup.txt"
-fmd5 = '09f40017cda448a96cb24cdc62a4857b' #of original.
+fmd5 = {} #of original.
+fmd5['2010'] = '09f40017cda448a96cb24cdc62a4857b'
+fmd5['2011'] = '575e59883e8515a271c17f1946810a28'
 baseurl = 'http://www2.census.gov/acs'+config.ACSYEAR+'_5yr/summaryfile/'
 if not os.path.exists(fname):
     url = urllib.urlopen(baseurl+fname)
     dat = url.read()
     url.close()
-    if hashlib.md5(dat).hexdigest() != fmd5:
+    if hashlib.md5(dat).hexdigest() != fmd5[config.ACSYEAR]:
         print 10*"*"+" WARNING! "+10*"*"
         print "Downloaded file seems to be corrupt!"
         print "Please download:",baseurl+fname
