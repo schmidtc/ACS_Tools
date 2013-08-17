@@ -1,1 +1,13 @@
 Tools for working the American Community Survey 
+
+>>> import numpy
+>>> import pyACS
+>>> table = pyACS.ACS(pyACS.sumlevel.TRACT)
+>>> len(table)
+74002
+>>> c = table['B19013001'] # Median Household Income
+>>> c = numpy.nan_to_num(c)
+>>> round(c.mean())
+54404.0
+>>> numpy.median(c)
+49028.0
