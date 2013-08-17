@@ -68,7 +68,7 @@ class GEO(object):
          BLANK   --   Reserved Future Use
     """
     def __init__(self,state):
-        path = os.path.join(config.ACSGEO, "g20105%s.csv"%state)
+        path = os.path.join(config.ACSGEO, "g"+config.ACSFILE+"%s.csv"%state)
         data = open(path,'r').readlines()
         self.data = [line.split(',') for line in data]
     def get(self,fieldName,sumlevel_filter=None):

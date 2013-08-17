@@ -32,7 +32,7 @@ def ffloat(x):
 
 class StSeq:
     def __init__(self,st,seq):
-        fname = "e20105%s%s000.txt"%(st,seq)
+        fname = "e"+config.ACSFILE+"%s%s000.txt"%(st,seq)
         self.path = os.path.join(config.ACS_PATH,fname)
     def get_col_by_lrn(self,colidx,lrns):
         LOGRECNO_IDX = 5
