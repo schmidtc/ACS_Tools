@@ -1,3 +1,8 @@
+"""
+See http://gwikis.blogspot.com/2012/02/geography-tables.html
+
+This was fixed in the 2011 release and this script is no longer needed.
+"""
 __author__ = "Charles R. Schmidt <schmidtc@gmail.com>"
 
 from config import STATE_NAME as STATES

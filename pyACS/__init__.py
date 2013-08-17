@@ -11,6 +11,10 @@ from geo import GEO
 
 def COL_LOOKUP():
     d = {}
+    table = os.path.join(config.PYACS_DATAPATH,'column_lookup.csv')
+    if not os.path.exists(table):
+        import seq
+        #TODO, refactor seq so this stuff gets wrapped in a function
     with open(os.path.join(config.PYACS_DATAPATH,'column_lookup.csv'),'r') as f:
         header = f.next()
         for line in f:

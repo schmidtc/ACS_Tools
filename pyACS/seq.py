@@ -8,7 +8,8 @@ import os
 import urllib,hashlib
 import pysal
 import json
-DEBUG = False
+import config
+DEBUG = config.DEBUG
 
 from restrictions import aval4blks, avalnonblks
 
@@ -124,7 +125,7 @@ class ACS_Table(object):
 
 fname = "Sequence_Number_and_Table_Number_Lookup.txt"
 fmd5 = '09f40017cda448a96cb24cdc62a4857b' #of original.
-baseurl = 'http://www2.census.gov/acs2010_5yr/summaryfile/'
+baseurl = 'http://www2.census.gov/acs'+config.ACSYEAR+'_5yr/summaryfile/'
 if not os.path.exists(fname):
     url = urllib.urlopen(baseurl+fname)
     dat = url.read()
@@ -176,7 +177,6 @@ for i,doc in enumerate(tables.values()):
     o.write('\n')
 o.close()
 
-import config
 o = open(os.path.join(config.PYACS_DATAPATH,'column_lookup.csv'),'w')
 o.write('CID,SEQ,IDX\n')
 for table in tables:

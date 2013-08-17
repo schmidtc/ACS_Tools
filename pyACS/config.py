@@ -5,7 +5,8 @@ DEBUG = True
 
 PYACS_DATAPATH = "/pyacs/"
 ACS_PATH = "/pyacs/SUMFILE/"
-ACSFILE = "20115" #2011 5-year
+ACSYEAR = "2011"
+ACSFILE = ACSYEAR+"5" #2011 5-year
 ACSGEO = "/pyacs/GEO/"
 ACSSHPS = "/pyacs/shps"
 # The follow series are in no particular order and should not be assumed comparable.
