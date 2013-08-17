@@ -143,7 +143,10 @@ if not os.path.exists(fname):
         o.write(dat.replace('\x93','').replace('\x94',''))
         o.close()
 input = pysal.open(fname,'r','csv')
-input.cast('Sequence Number',str)
+try:
+    input.cast('Sequence Number',str)
+except:
+    input.cast('seq',str)
 header = input.header
 
 if DEBUG: print header
