@@ -10,6 +10,8 @@ import pysal
 import json
 DEBUG = False
 
+from restrictions import aval4blks, avalnonblks
+
 def isint(x):
     """
     isint(x) -- Test if value of x is an int.
@@ -74,7 +76,21 @@ class ACS_Table(object):
         doc["universe"] = universe
         doc["subject"] = subject
         doc["tid"] = self._data['Table ID']
-        return json.dumps(doc)
+        if doc["tid"] in aval4blks:
+            doc["blockgrps"] = aval4blks[doc["tid"]]
+        else:
+            doc["blockgrps"] = False
+        if doc["tid"] in avalnonblks:
+            doc["restrictions"] = avalnonblks[doc["tid"]]
+        else:
+            doc["restrictions"] = False
+        doc["columns"] = [dict(zip(("cid","ColumnTitle"),map(str,col[-2:]))) for col in self._data['Columns']]
+        try:
+            return json.dumps(doc)
+        except:
+            print "HERE",
+            print doc["tid"]
+            return ""
     def process_row(self, row):
         assert row['File ID'] == 'ACSSF'
         assert row['Table ID'] == self._data['Table ID']
@@ -107,7 +123,7 @@ class ACS_Table(object):
 
 
 fname = "Sequence_Number_and_Table_Number_Lookup.txt"
-fmd5 = '09f40017cda448a96cb24cdc62a4857b'
+fmd5 = '09f40017cda448a96cb24cdc62a4857b' #of original.
 baseurl = 'http://www2.census.gov/acs2010_5yr/summaryfile/'
 if not os.path.exists(fname):
     url = urllib.urlopen(baseurl+fname)
@@ -119,7 +135,9 @@ if not os.path.exists(fname):
         print "Please download:",baseurl+fname
     else:
         o = open(fname,'w')
-        o.write(dat)
+        ### The "ascii" file contains non-ascii chars.
+        ### Are these people using word?
+        o.write(dat.replace('\x93','').replace('\x94',''))
         o.close()
 input = pysal.open(fname,'r','csv')
 input.cast('Sequence Number',str)
