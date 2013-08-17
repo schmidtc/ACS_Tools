@@ -96,7 +96,7 @@ class ACS_Table(object):
         assert row['File ID'] == 'ACSSF'
         assert row['Table ID'] == self._data['Table ID']
         sq = row['Sequence Number']
-        if row['Line Number'] == '' and row['Start Position'] != '':
+        if row['Line Number'] == '.' and row['Start Position'] != '.':
             self._data['Sequences'][sq] = {}
             self._data['Sequences'][sq]['Start Position'] = int(row['Start Position'])
             self._data['Sequences'][sq]['Cells'] = int(row['Total Cells in Table'].split()[0])
@@ -104,7 +104,7 @@ class ACS_Table(object):
             self._data['Sequences'][sq]['Subject Area'] = row['Subject Area']
             self._seq = row['Sequence Number']
             self._column = int(row['Start Position']) - 1 #Make zero-offset
-        elif row['Line Number'] == '' and row['Start Position'] == '':
+        elif row['Line Number'] == '.' and row['Start Position'] == '.':
             assert row['Table Title'].startswith('Universe:')
             self._data['Sequences'][sq]['Universe'] = row['Table Title'].lstrip('Universe: ')
         else:
@@ -143,10 +143,9 @@ if not os.path.exists(fname):
         o.write(dat.replace('\x93','').replace('\x94',''))
         o.close()
 input = pysal.open(fname,'r','csv')
-try:
-    input.cast('Sequence Number',str)
-except:
-    input.cast('seq',str)
+#### Make 2011 compatible with 2010
+#### Fields are same, but the names in the header were changes.
+input.header = "File ID,Table ID,Sequence Number,Line Number,Start Position,Total Cells in Table,Total Cells in Sequence,Table Title,Subject Area".split(',')
 header = input.header
 
 if DEBUG: print header

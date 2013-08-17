@@ -20,7 +20,6 @@ $ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_
 $ tar xfz Tracts_Block_Groups_Only.tar.gz
 
 Now get the GEO files...
-$ mkdir GEO
-$ cd GEO
 $ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/2011_ACS_Geography_Files.zip"
 $ unzip 2011_ACS_Geography_Files.zip
+$ mv geog GEO
