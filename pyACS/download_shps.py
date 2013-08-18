@@ -19,11 +19,13 @@ DEBUG = config.DEBUG
 #       *500k = 1:500,000 
 #        5m = 1:5,000,000 
 #        20m = 1:20,000,000
-base_url = "http://www2.census.gov/geo/tiger/TIGER2010/BG/2010/"
-name_template = "tl_2010_%s_bg10.zip" #2digit FIPS
+#base_url = "http://www2.census.gov/geo/tiger/TIGER2010/BG/2010/"
+#name_template = "tl_2010_%s_bg10.zip" #2digit FIPS
+base_url = "http://www2.census.gov/geo/tiger/TIGER2011/TRACT/"
+name_template = "tl_2011_%s_tract.zip" #2digit FIPS
 
 def dl_merge(outname="tracts",sumlevel="140"):
-    os.chdir('tmp')
+    os.chdir('/tmp')
     outshp = pysal.open(outname+'.shp','w')
     outdbf = pysal.open(outname+'.dbf','w')
     for st in config.STATE_FIPS:
@@ -51,6 +53,5 @@ def dl_merge(outname="tracts",sumlevel="140"):
         os.remove(fname.replace('.zip','.prj'))
     outshp.close()
     outdbf.close()
-    os.chdir('..')
 if __name__=='__main__':
-    dl_merge(outname='blkgrps',sumlevel='150')
+    dl_merge(outname='/pyacs/tracts11',sumlevel='140')
