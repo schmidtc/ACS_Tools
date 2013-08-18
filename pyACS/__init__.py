@@ -70,9 +70,22 @@ class ACS:
             geo = GEO(st)
             self.GEOID.extend(geo.get('GEOID',sumlevel))
             self.LOGRECNO[st] = geo.get('LOGRECNO',sumlevel)
+        # Trim Full GEOID to so it matched shapefile geoid.
+        # 15000US010010201001 -> 010010201001
+        self.GEOID2 = [x[7:] for x in self.GEOID]
     def __len__(self):
         """ returns the number of regions at the current sumlevel """
         return len(self.GEOID)
+    def get_ordered(self,ids,key):
+        col = self[key]
+        if 'US' in ids[0]: #we're using long GEOID, eg: 15000US010010201001
+            ids0 = self.GEOID
+        else: #we're using short GEOID, eg: 010010201001
+            ids0 = self.GEOID2
+        assert len(ids0) == len(col)
+        assert set(ids).symmetric_difference(set(ids0)) == set([])
+        lookup = dict(zip(ids0,col))
+        return [lookup[id] for id in ids]
     def __getitem__(self,key):
         if key not in COL_LOOKUP:
             raise KeyError
