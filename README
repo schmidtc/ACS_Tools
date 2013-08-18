@@ -18,6 +18,7 @@ $ mkdir /pyacs
 $ cd /pyacs
 $ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/Tracts_Block_Groups_Only.tar.gz"
 $ tar xfz Tracts_Block_Groups_Only.tar.gz
+$ mv group2 SUMFILE
 
 Now get the GEO files...
 $ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/2011_ACS_Geography_Files.zip"
