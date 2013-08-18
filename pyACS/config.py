@@ -4,11 +4,11 @@ pyACS -- config -- Settings for data paths and GLOBAL values
 DEBUG = True
 
 PYACS_DATAPATH = "/pyacs/"
-ACS_PATH = "/pyacs/SUMFILE/"
+ACS_PATH = PYACS_DATAPATH+"SUMFILE/"
 ACSYEAR = "2011"
 ACSFILE = ACSYEAR+"5" #2011 5-year
-ACSGEO = "/pyacs/GEO/"
-ACSSHPS = "/pyacs/shps"
+ACSGEO = PYACS_DATAPATH+"GEO/"
+ACSSHPS = PYACS_DATAPATH+"shps"
 # The follow series are in no particular order and should not be assumed comparable.
 STATE_AB = ['ak', 'al', 'ar', 'az', 'ca', 'co', 'ct', 'dc', 'de', 'fl', 'ga', 'hi', 'ia', 'id', 'il', 'in', 'ks', 'ky', 'la', 'ma', 'md', 'me', 'mi', 'mn', 'mo', 'ms', 'mt', 'nc', 'nd', 'ne', 'nh', 'nj', 'nm', 'nv', 'ny', 'oh', 'ok', 'or', 'pa', 'pr', 'ri', 'sc', 'sd', 'tn', 'tx', 'us', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy']
 # extracted from http://www2.census.gov/acs2010_5yr/summaryfile/2006-2010_ACSSF_By_State_By_Sequence_Table_Subset/ using vim and python
