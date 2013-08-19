@@ -30,12 +30,19 @@ $ mv geog GEO
   column_lookup.csv
   table_restrictions.csv
   
-  /SUMFILE
-      e20115ak0001000.txt	e20115ky0077000.txt	e20115oh0040000.txt	m20115ak0003000.txt	m20115ky0079000.txt	m20115oh0042000.txt
-      e20115ak0002000.txt	e20115ky0078000.txt	e20115oh0041000.txt	m20115ak0004000.txt	m20115ky0080000.txt	m20115oh0043000.txt
+  /SUMFILE # each state has 2 sets of 113 chuncks of text files
+      e20115tx0001000.txt
       .
       .
       .
+      e20115tx0113000.txt
+      
+      m20115tx0001000.txt
+      .
+      .
+      .
+      m20115tx0113000.txt
+      
   /GEO # Fips codes and names of different geographic areas per state
       g20115ak.csv	
       g20115de.csv	
