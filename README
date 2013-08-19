@@ -1,4 +1,14 @@
-Tools for working the American Community Survey 
+Tools for working the American Community Survey.
+
+The Census Bureau provides ACS data in machine readable ASCII (text) files. The
+5 year estimates can be downloaded state by state or in one giant file.  The
+giant file is actually broken into two parts, one containing estimates for block
+groups and tracts only and the other containing everything else.  Since block
+groups are mostly what I want to experiment with this makes life a little
+easier. http://www2.census.gov/acs2010_5yr/summaryfile/2006-2010_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/Tracts_Block_Groups_Only.zip
+
+
+The ~3gb "Tracts_Block_Groups_Only.zip" file  
 
 >>> import numpy
 >>> import pyACS
@@ -30,26 +40,25 @@ $ mv geog GEO
   column_lookup.csv
   table_restrictions.csv
   
-  /SUMFILE # each state has 2 sets of 113 chuncks of text files
-      e20115tx0001000.txt
-      .
-      .
-      .
-      e20115tx0113000.txt
-      
-      m20115tx0001000.txt
-      .
-      .
-      .
-      m20115tx0113000.txt
+  /SUMFILE # each state has estimates and error file sets of 113 sequences or chuncks of text files
+
+  # These "e.....txt" files contain estimates 
+  # and are named using this schema:
+  # <estimate><year><periodicity><state><sequence#><iterationID>.txt  notes:
+  # iterationID is usually 000
+
+      e20115tx0001000.txt...e20115tx0113000.txt
+
+  #These files are Error margins for the associated estimates. 
+
+      m20115tx0001000.txt...m20115tx0113000.txt
       
   /GEO # Fips codes and names of different geographic areas per state
       g20115ak.csv	
       g20115de.csv	
       g20115ks.csv
-      .
-      .
-      .
+      etc...
+
     
 Example line from e20115ky0037000.txt:      
       
