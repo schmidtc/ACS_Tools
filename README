@@ -24,3 +24,24 @@ Now get the GEO files...
 $ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/2011_ACS_Geography_Files.zip"
 $ unzip 2011_ACS_Geography_Files.zip
 $ mv geog GEO
+
+
+*File structure of downloaded ACS census data* `$ ls /pyacs`
+  column_lookup.csv
+  table_restrictions.csv
+  
+  /SUMFILE
+      e20115ak0001000.txt	e20115ky0077000.txt	e20115oh0040000.txt	m20115ak0003000.txt	m20115ky0079000.txt	m20115oh0042000.txt
+      e20115ak0002000.txt	e20115ky0078000.txt	e20115oh0041000.txt	m20115ak0004000.txt	m20115ky0080000.txt	m20115oh0043000.txt
+      .
+      .
+      .
+  /GEO # Fips codes and names of different geographic areas per state
+      g20115ak.csv	
+      g20115de.csv	
+      g20115ks.csv
+      .
+      .
+      .
+      
+      
