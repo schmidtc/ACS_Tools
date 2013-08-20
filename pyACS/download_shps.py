@@ -122,5 +122,5 @@ def dl_merge(outname="tracts",sumlevel="140"):
     outshp.close()
     outdbf.close()
 if __name__=='__main__':
-    #dl_merge(outname='/pyacs/tracts11',sumlevel='140')
-    fetch_shapefile("texas","Block Group")
+    dl_merge(outname='/pyacs/tracts11',sumlevel='140')
+    #fetch_shapefile("texas","Block Group")
