@@ -1,4 +1,6 @@
-Tools for making extraction of Census Bureau data easier.
+Warning: Still under construction.
+
+Objective: Tools for making extraction of Census Bureau data easier 
 
 For example, to get income values by census tract which were estimated from the
 Amercian Community Survey (ACS):
@@ -23,7 +25,7 @@ But first you need to download and install the census data....
     $ tar xfz Tracts_Block_Groups_Only.tar.gz
     $ mv group2 SUMFILE
 
-The downloaded file of attribute data is ~3gb "Tracts_Block_Groups_Only.zip" containsestimates for block groups and tracts only.
+The downloaded file of attribute data is ~3gb "Tracts_Block_Groups_Only.zip" contains estimates for block groups and tracts only.
 
 Now get the GEO files...
 
