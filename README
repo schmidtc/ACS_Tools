@@ -3,32 +3,33 @@ Tools for making extraction of Census Bureau data easier.
 For example, to get income values by census tract which were estimated from the
 Amercian Community Survey (ACS):
 
->>> import numpy
->>> import pyACS
->>> table = pyACS.ACS(pyACS.sumlevel.TRACT)
->>> len(table)
-74002
->>> c = table['B19013001'] # Median Household Income
->>> c = numpy.nan_to_num(c)
->>> round(c.mean())
-54404.0
->>> numpy.median(c)
-49028.0
+    >>> import numpy
+    >>> import pyACS
+    >>> table = pyACS.ACS(pyACS.sumlevel.TRACT)
+    >>> len(table)
+    74002 
+    >>> c = table['B19013001'] # Median Household Income
+    >>> c = numpy.nan_to_num(c)
+    >>> round(c.mean())
+    54404.0
+    >>> numpy.median(c)
+    49028.0
 
 But first you need to download and install the census data....
 
-$ mkdir /pyacs
-$ cd /pyacs
-$ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/Tracts_Block_Groups_Only.tar.gz"
-$ tar xfz Tracts_Block_Groups_Only.tar.gz
-$ mv group2 SUMFILE
+    $ mkdir /pyacs
+    $ cd /pyacs
+    $ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/Tracts_Block_Groups_Only.tar.gz"
+    $ tar xfz Tracts_Block_Groups_Only.tar.gz
+    $ mv group2 SUMFILE
 
 The downloaded file of attribute data is ~3gb "Tracts_Block_Groups_Only.zip" containsestimates for block groups and tracts only.
 
 Now get the GEO files...
-$ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/2011_ACS_Geography_Files.zip"
-$ unzip 2011_ACS_Geography_Files.zip
-$ mv geog GEO
+
+    $ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/2011_ACS_Geography_Files.zip"
+    $ unzip 2011_ACS_Geography_Files.zip
+    $ mv geog GEO
 
 The downloaded GEO files contain the link between the `Logical Record Number` of the attribute data and the `geoid` of the shapefile/geometry data
 
