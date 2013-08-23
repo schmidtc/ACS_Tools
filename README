@@ -3,7 +3,6 @@ Tools for making extraction of Census Bureau data easier.
 For example, to get income values by census tract which were estimated from the
 Amercian Community Survey (ACS):
 
-
 >>> import numpy
 >>> import pyACS
 >>> table = pyACS.ACS(pyACS.sumlevel.TRACT)
@@ -16,11 +15,8 @@ Amercian Community Survey (ACS):
 >>> numpy.median(c)
 49028.0
 
-
-
-
-
 But first you need to download and install the census data....
+
 $ mkdir /pyacs
 $ cd /pyacs
 $ wget "http://www2.census.gov/acs2011_5yr/summaryfile/2007-2011_ACSSF_All_In_2_Giant_Files(Experienced-Users-Only)/Tracts_Block_Groups_Only.tar.gz"
@@ -39,19 +35,19 @@ The downloaded GEO files contain the link between the `Logical Record Number` of
 ### Description of the files in `$ ls /pyacs`:
   
   * `column_lookup.csv` contains {variable code : variable name}
-  * `table_restrictions.csv` is not relevant, its has information on specific nestings of geographies
-`/SUMFILE` contains 
-	* rows of  attribute values for each geographic area
+  
+`/SUMFILE` contains files formatted as data tables, where
+	* each row holds the attribute values for one geographic area
   	* `Logical Record Number` column denotes the ID of the geographic area
-        * columns after the  `Logical Record Number` are values for the census variables
-	* The files are organized into sets of state files
-	* Each set of state files has variable estimates and errors that are sequenced into 113 chunks of text files
-  	* e<2011XXXX>.txt files contain estimates (relevant).
-  	* Naming schema: <estimate><year><periodicity><state><sequence#><iterationID>.txt
-  	* iterationID is usually 000
-  	* m2011<stXXXX>.csv files of error margins are associated to estimates (for now not relevant).
-        * each state has the same set of sequence id files mapped to same col variables
-`/GEO` contains
-	* mapping { `Logical Record Number` attribute value : shapefile geometry FIPS code } 
-	* per state ie. g20115ak.csv, etc...
+        * columns after the `Logical Record Number` are values for the census variables
+	* the files are organized into sets of state files
+	* there are two types of sets of state files: variable estimates and errors (`e<2011XXXX>.txt` files contain estimates)
+	* Naming schema: <estimate><year><periodicity><state><sequence#><iterationID>.txt
+  	* iterationID is usually `000`
+  	* each state datset has been sequenced into 113 chunks of text files
+  	* `m2011<stXXXX>.csv` files are error margins associated to estimates
+
+`/GEO` contains files where 
+	* the `Logical Record Number` of an area is on the same row as the shapefile's FIPS code (geoid) 
+	* areas are organized by states files, ie. `g20115ak.csv`, etc...
     
