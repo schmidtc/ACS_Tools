@@ -39,3 +39,6 @@ See a description of the files in `$ ls /pyacs` here: https://github.com/schmidt
 
 See ACS ethnic codes here: http://www.census.gov/acs/www/Downloads/data_documentation/CodeLists/2011_ACS_Code_Lists.pdf
   
+See ACS description of variables: http://www.census.gov/acs/www/Downloads/data_documentation/SubjectDefinitions/2011_ACSSubjectDefinitions.pdf
+
+A summary on ACS ancestry variables is here: https://github.com/schmidtc/ACS_Tools/wiki/_new?wiki[name]=ACS%20Ancestry%20Variables
