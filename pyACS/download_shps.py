@@ -79,7 +79,8 @@ def fetch_shapefile(state,geolevel):
     dat = url.read()
     with open(fname,'wb') as o:
         o.write(dat)
-    os.system('unzip '+fname)
+    r=os.system('unzip '+fname)
+    print "unzip result", r
     fname.replace('.zip','.shp')
     fname.replace('.zip','.dbf')
     # rename to a easier to understand filename:
@@ -122,5 +123,5 @@ def dl_merge(outname="tracts",sumlevel="140"):
     outshp.close()
     outdbf.close()
 if __name__=='__main__':
-    dl_merge(outname='/pyacs/tracts11',sumlevel='140')
-    #fetch_shapefile("texas","Block Group")
+    #dl_merge(outname='/pyacs/tracts11',sumlevel='140')
+    fetch_shapefile("texas","Block Group")
