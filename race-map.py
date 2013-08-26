@@ -100,6 +100,12 @@ BIN COUNT COLOR COLORLABEL
 (175, 141, 195)
 (118, 42, 131)    
 
+Each color should be in HEX RGB format beginning with a '#'.
+The first color in the list provided is assigned to class 2, the next to class 3 and so on.
+
+Class 0 and Class 1 are reserved for the background and borders respectivly.
+The Background color should NOT be used anywhere else in the color scheme.
+Since this color will be made transparent.
 """
 
 
