@@ -122,6 +122,50 @@ def dl_merge(outname="tracts",sumlevel="140"):
         os.remove(fname.replace('.zip','.prj'))
     outshp.close()
     outdbf.close()
+
+
+
+### GET BLOCKS FOR 2010 ####
+
+def fetch_and_merge_state_block_shapefiles(outname="blocks"):
+    base_url = "http://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/"
+    name_template = "tl_2010_%s_tabblock.zip" #2digit STATE FIPS
+
+    os.chdir('/tmp')
+    outshp = pysal.open(outname+'.shp','w')
+    outdbf = pysal.open(outname+'.dbf','w')
+    for st in config.STATE_FIPS:
+        fname = name_template%(st)
+        if DEBUG: print fname
+        url = urllib.urlopen(base_url+fname)
+        dat = url.read()
+        if not os.path.exists(fname):
+            with open(fname,'wb') as o:
+                o.write(dat)
+            os.system('unzip '+fname)
+        shp = pysal.open(fname.replace('.zip','.shp'),'r')
+        for x in shp:
+            outshp.write(x)
+        dbf = pysal.open(fname.replace('.zip','.dbf'),'r')
+        outdbf.header = dbf.header
+        outdbf.field_spec = dbf.field_spec
+        for row in dbf:
+            outdbf.write(row)
+        os.remove(fname)
+        os.remove(fname.replace('.zip','.shp'))
+        os.remove(fname.replace('.zip','.shx'))
+        os.remove(fname.replace('.zip','.dbf'))
+        os.remove(fname.replace('.zip','.shp.xml'))
+        os.remove(fname.replace('.zip','.prj'))
+    outshp.close()
+    outdbf.close()
+
+
+
+
+
+
 if __name__=='__main__':
     #dl_merge(outname='/pyacs/tracts11',sumlevel='140')
-    fetch_shapefile("texas","Block Group")
+    # fetch_shapefile("texas","Block Group")
+    fetch_and_merge_state_block_shapefiles(outname="blocks")
