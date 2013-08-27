@@ -129,7 +129,7 @@ def dl_merge(outname="tracts",sumlevel="140"):
 
 def fetch_and_merge_state_block_shapefiles(outname="blocks"):
     base_url = "http://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/"
-    name_template = "tl_2010_%s_tabblock.zip" #2digit STATE FIPS
+    name_template = "tl_2010_%s_tabblock10.zip" #2digit STATE FIPS
 
     os.chdir('/tmp')
     outshp = pysal.open(outname+'.shp','w')
@@ -137,6 +137,7 @@ def fetch_and_merge_state_block_shapefiles(outname="blocks"):
     for st in config.STATE_FIPS:
         fname = name_template%(st)
         if DEBUG: print fname
+        print base_url+fname
         url = urllib.urlopen(base_url+fname)
         dat = url.read()
         if not os.path.exists(fname):
