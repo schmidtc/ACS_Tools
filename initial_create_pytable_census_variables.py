@@ -22,16 +22,16 @@ class TractModel(IsDescription):
     blackcount        = UInt16Col()     # Unsigned short integer
     tractcount        = UInt16Col()     # Unsigned short integer
 
-filename = "tracts_race.h5"
-h5file = open_file(filename, mode = "w", title = "Test file")
-group = h5file.create_group("/", 'tracts', 'Tract Attributes')# new group under "/" (root)
-table = h5file.create_table(group, 'readout', TractModel, "Race counts")# new table of group
+filename = "census_variables.h5"
+h5file = open_file(filename, mode = "w", title = "Census Variables")
+group = h5file.create_group("/", 'tracts', 'Tract Level')# new group under "/" (root)
+tract_race_table = h5file.create_table(group, 'readout', TractModel, "Race Counts")# new table of group
 # Fill the table with 10 particles
-tract = table.row
+tract = tract_race_table.row
 for i in xrange(N):
-    tract['geoid']  = geoids[i]
-    tract['blackcount'] = black[i]
-    tract['totalcount'] = total[i]
+    tract_race_table.row['geoid']  = geoids[i]
+    tract_race_table.row['blackcount'] = tract_black[i]
+    tract_race_table.row['tractcount'] = tract_total[i]
     tract.append()
 # Close (and flush) the file
 h5file.close()

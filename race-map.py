@@ -19,20 +19,21 @@ TODO:
 import numpy
 import pysal
 import pyACS
+import tables
 
 
 ### IN THE FUTURE I WILL REPLACE THIS WITH pyTABLES
+f=tables.open_file("census_variables.h5")
+tract_total=f.root.tracts.readout.cols.tractcount[:] 
+tract_black=f.root.tracts.readout.cols.blackcount[:] 
 
 # Extract tract ids from the shapefile
-dbf = pysal.open('/pyacs/tracts11.dbf')
-geoids = dbf.by_col('GEOID') # get the geoids, in same geoids as .shp
-# Question: why is GEOID != STATE + COUNTY + TRACT ?
+#dbf = pysal.open('/pyacs/tracts11.dbf')
+#geoids = dbf.by_col('GEOID') # 11chars = st2+county3+tract6
+#datasetObj = pyACS.ACS()
+#tract_total = numpy.array(datasetObj.get_ordered(geoids, 'B01003001'))
+#tract_black = numpy.array(datasetObj.get_ordered(geoids, 'B02009001'))
 
-# The Magic
-datasetObj = pyACS.ACS()
-# arrays of total pop and black pop values ordered by shapefile's tract ids
-tract_total = numpy.array(datasetObj.get_ordered(geoids, 'B01003001'))
-tract_black = numpy.array(datasetObj.get_ordered(geoids, 'B02009001'))
 N=len(tract_black)
 
 # demoninator: parent state's black population / total population
