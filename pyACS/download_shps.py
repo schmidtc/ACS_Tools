@@ -163,10 +163,24 @@ def fetch_and_merge_state_block_shapefiles(outname="blocks"):
 
 
 
+def fetch_blockshapefile(state):
+    CENSUS_URL = "http://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/"
+    SHAPEFILE_TEMPLATE = "tl_2010_%s_tabblock10.zip" #2digit STATE FIPS
 
+    fname=SHAPEFILE_TEMPLATE.format(state=CODE_LOOKUP[state])
+    print fname
+    url = urllib.urlopen(CENSUS_URL+fname)
+    dat = url.read()
+    with open("/vol/"+fname,'wb') as o:
+        o.write(dat)
+    r=os.system('unzip '+fname)
+    print "unzip result", r
+    fname.replace('.zip','.shp')
+    fname.replace('.zip','.dbf')
 
 
 if __name__=='__main__':
     #dl_merge(outname='/pyacs/tracts11',sumlevel='140')
     # fetch_shapefile("texas","Block Group")
-    fetch_and_merge_state_block_shapefiles(outname="blocks")
+    #fetch_and_merge_state_block_shapefiles(outname="blocks") 
+    fetch_blockshapefile("delaware")
