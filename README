@@ -35,22 +35,10 @@ Now get the GEO files...
 
 The downloaded GEO files contain the link between the `Logical Record Number` of the attribute data and the `geoid` of the shapefile/geometry data
 
-### Description of the files in `$ ls /pyacs`:
-  
-  * `column_lookup.csv` contains {variable code : variable name}
-  
-`/SUMFILE` contains files formatted as data tables, where
-	* each row holds the attribute values for one geographic area
-  	* `Logical Record Number` column denotes the ID of the geographic area
-        * columns after the `Logical Record Number` are values for the census variables
-	* the files are organized into sets of state files
-	* there are two types of sets of state files: variable estimates and errors (`e<2011XXXX>.txt` files contain estimates)
-	* Naming schema: <estimate><year><periodicity><state><sequence#><iterationID>.txt
-  	* iterationID is usually `000`
-  	* each state datset has been sequenced into 113 chunks of text files
-  	* `m2011<stXXXX>.csv` files are error margins associated to estimates
+See a description of the files in `$ ls /pyacs` here: https://github.com/schmidtc/ACS_Tools/wiki/_preview
 
-`/GEO` contains files where 
-	* the `Logical Record Number` of an area is on the same row as the shapefile's FIPS code (geoid) 
-	* areas are organized by states files, ie. `g20115ak.csv`, etc...
-    
+See ACS ethnic codes here: http://www.census.gov/acs/www/Downloads/data_documentation/CodeLists/2011_ACS_Code_Lists.pdf
+  
+See ACS description of variables: http://www.census.gov/acs/www/Downloads/data_documentation/SubjectDefinitions/2011_ACSSubjectDefinitions.pdf
+
+A summary on ACS ancestry variables is here: https://github.com/schmidtc/ACS_Tools/wiki/_new?wiki[name]=ACS%20Ancestry%20Variables
