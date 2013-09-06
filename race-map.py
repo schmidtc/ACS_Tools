@@ -1,8 +1,18 @@
-"""Get Data for a Map of Location Quotients by Race
+""" location quotients (LQs)
 
-1. calculate LQs
-2. calculate where to break bins
-3. associated each bin of areas to a color
+    LQ: 
+
+        a metric of spatial concentration in a single area of an ethnic
+        group or industry group compared to all other groups, and all other areas. 
+
+    Overview: 
+    
+        extract census variables, such as counts by race, and transform them into LQs 
+
+TODO:
+
+1. uniform scale centered at zero  -2 -1 -.5 0 +.5 +1 + 2
+2. discretization n=null, and transform to null ,, or 0,1,2,3,4,5,6,7,8,9
 
 [Census Variables:](http://www2.census.gov/acs2011_5yr/summaryfile/ACS_2007_2011_SF_Tech_Doc.pdf)
 
@@ -21,6 +31,11 @@ import pysal
 import pyACS
 import tables
 
+# stylized facts:
+# 689 of 74,001 tracts have zero population 1%
+# 5,529 of 74,001 tracts have black zero population 7%
+# 42 million black / 310 million total = .13
+# texas fips = 48, 5265 blocks, 390 have zero black population
 
 f=tables.open_file("census_variables.h5")
 print "pyTable Fields Description: ", f.root.tracts.readout
@@ -83,8 +98,7 @@ BIN COUNT COLOR COLORLABEL
 40-60% 14662    (247, 247, 247)
 60-90% 21993    (231, 212, 232)
 90-99% 6598     (175, 141, 195)
-99-100 734      (118, 42, 131)      PURPLE
-
+99-100 734      (118, 42, 131)      PURPLE 0x762A83
 Each color should be in HEX RGB format beginning with a '#'.
 The first color in the list provided is assigned to class 2, the next to class 3 and so on.
 
@@ -92,6 +106,20 @@ Class 0 and Class 1 are reserved for the background and borders respectivly.
 The Background color should NOT be used anywhere else in the color scheme.
 Since this color will be made transparent.
 """
+
+fillcolors=[
+    "#0x762A83",
+    "#0xAF8DC3",
+    "#0xE7D4E8",
+    "#0xF7F7F7",
+    "#0xD9F0D3",
+    "#0x7FBF7B",
+    "#0x1B7837"
+    ]
+
+classes = numpy.zeros(N)
+
+classes
 
 
 def make_lqs():
@@ -101,4 +129,3 @@ def make_lqs():
 
 if __name__ == '__main__':
     pass
-
