@@ -75,10 +75,6 @@ validtractidx=where(tract_total!=0)[0] # the indexes of tracts that have populat
 invalidtractidx=where(tract_total==0)[0] # the indexes of tracts with zero population
 tract_total[invalidtractidx] = numpy.nan # replace 0 with null values, so no division by zero
 
-# classify 689 tracts with (zero total pop) nans, same as background: 0
-class_LQ=zeros(N)
-class_quasiLQ=zeros(N)
-class_localD=zeros(N)
 
 # calculate location quotients
 numerator=tract_black/tract_total
@@ -111,6 +107,7 @@ sum((q>-.10) & (q<.10))
 
 
 # convert back nulls to zeros
+# basically putting nulls in as middle bin with grey fill
 qLQ[where(isnan(qLQ)==True)[0]]=0
 
 print "quasiLQs:"
