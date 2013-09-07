@@ -12,6 +12,11 @@ import pyACS
 import tables
 import simplejson
 from numpy import *
+import matplotlib.pyplot as plt
+
+#a = array([[1,2,3],[0,3,NaN]]);
+#whereAreNaNs = isnan(a);
+#a[whereAreNaNs] = 0;
 
 f=tables.open_file("census_variables.h5")
 print "pyTable Fields Description: ", f.root.tracts.readout
